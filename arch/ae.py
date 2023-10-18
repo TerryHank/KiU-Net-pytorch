@@ -242,7 +242,7 @@ class kiunet(nn.Module):
         self.soft = nn.Softmax(dim =1)
     
     def forward(self, x):
-
+        x = x[:, :1, :, :]
         out = F.relu(self.en1_bn(F.max_pool2d(self.encoder1(x),2,2)))  #U-Net branch
         out1 = F.relu(self.enf1_bn(F.interpolate(self.encoderf1(x),scale_factor=(2,2),mode ='bilinear'))) #Ki-Net branch
         tmp = out
